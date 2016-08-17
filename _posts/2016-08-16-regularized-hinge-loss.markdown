@@ -5,10 +5,6 @@ date:   2016-08-16 17:00:04 -0700
 categories: jekyll update
 ---
 
-$$ f(x,y) = \begin{cases} \text{Alice} & \text{if } x > y \ \text{Bob} & \text{if } x < y \ \text{same} & \text{if } x = y \end{cases} $$
-
-$$ \lambda $$ 
-
 From a theoretical perspective, adding regularization makes a convex loss function strongly-convex, allowing faster optimization.  Regularization also restricts the solution space (under some constraints). Before diving into analyzing the minimizer, let us first define the problem. Hinge loss is often used as a surrogate loss for soft-margin SVM problems, and is defined as  : $$	l(w,x,y) = max(0, 1 - yw^Tx) $$
 
 Note that Hinge loss is a positive convex function (but not strongly-convex). If we consider the soft margin SVM we have the objective function as follows : 
@@ -90,7 +86,7 @@ The actual minimizer is either a local-quadratic minimizer or an interval bounda
 
 $$w^*$$ must lie in the interval for which the quadratic is defined. 
 
-***Sub-Case 1 :***  When $$ \frac{1}{\alpha_n} \leq w* $$ 
+***Sub-Case 1 :***  When $$ \frac{1}{\alpha_n} \leq w^* $$ 
 
 $$w^*$$ = 0 $$\Rightarrow {w^*}^2 \leq \frac{1}{\lambda}$$   (if this is the solution, when $$\forall i, \frac{1}{\alpha_i} = 0$$)
 
@@ -104,7 +100,7 @@ $$ \Rightarrow \lambda \geq (\frac{\sum_{i=1}^{n} (\alpha_i)}{n}) ^2 $$
 
 $$ \Rightarrow \frac{1}{\lambda} \geq (\frac{\sum_{i=1}^{n} (\alpha_i)}{n\lambda}) ^2 $$ 
 
-$$\Rightarrow w* \leq \sqrt{\frac{1}{\lambda}} $$
+$$\Rightarrow w^* \leq \sqrt{\frac{1}{\lambda}} $$
 
 ***Sub-Case 3 :*** When  $$\frac{1}{\alpha_{j-1}}\leq w^* \leq \frac{1}{\alpha_j}$$
 
@@ -133,7 +129,7 @@ $$ \Rightarrow  \frac{(n-i + 1) \alpha_j}{n \lambda} \geq \frac{1}{\alpha_j}$$
 
 $$ \Rightarrow \frac{1}{\alpha_j^2} \leq \frac{(n-i + 1)}{n \lambda} \leq \frac{1}{\lambda}$$
 
-$$\Rightarrow w* = \frac{1}{\alpha_j} \leq \sqrt{\frac{1}{\lambda}} \blacksquare $$
+$$\Rightarrow w^* = \frac{1}{\alpha_j} \leq \sqrt{\frac{1}{\lambda}}  $$ 
 
 
 

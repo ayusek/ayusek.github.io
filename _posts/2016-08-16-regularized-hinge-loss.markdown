@@ -5,20 +5,18 @@ date:   2016-08-16 17:00:04 -0700
 categories: jekyll update
 ---
 
-From a theoretical perspective, adding regularization makes a convex loss function strongly-convex, allowing faster optimization. 
-
-Regularization also restricts the solution space (under some constraints). Before diving into analyzing the minimizer, let us first define the problem. Hinge loss is often used as a surrogate loss for soft-margin SVM problems, and is defined as  : \\(	l(w,x,y) = max(0, 1 - yw^Tx) \\)
+From a theoretical perspective, adding regularization makes a convex loss function strongly-convex, allowing faster optimization.  Regularization also restricts the solution space (under some constraints). Before diving into analyzing the minimizer, let us first define the problem. Hinge loss is often used as a surrogate loss for soft-margin SVM problems, and is defined as  : \\(	l(w,x,y) = max(0, 1 - yw^Tx) \\)
 
 Note that Hinge loss is a positive convex function (but not strongly-convex). If we consider the soft margin SVM we have the objective function as follows : 
 
-\\[
+$$
 	L(w) = \frac{\lambda}{2}\|w\|^2 + \frac{1}{n}\sum_{i=1}^{n}max(0,1-y_iw^Tx_i)
-\\]
+$$ 
 
 We want to find \\( w^* = argmin ( L(w)) \\)
 
-**Claim :** 
-\\( \forall x_i, y_i \epsilon R \\) , the minimizer of the hinge loss always lies in a ball of radius $$ \frac{1}{\lambda} $$ or \\( {w^*}^2 \leq \frac{1}{\lambda} \\)
+ **Claim :** 
+$$ \forall x_i, y_i \epsilon R, {w^*}^2 \leq \frac{1}{\lambda} $$ or the minimizer of the hinge loss always lies in a ball of radius $$ \frac{1}{\lambda} $$
 
 
 #### A Trivial Bound 
@@ -114,12 +112,12 @@ $$ \implies \frac{1}{\alpha_i^2} \leq \frac{(n-i + 1)}{n \lambda} \leq \frac{1}{
 $$\implies w* = \frac{1}{\alpha_i} \leq \sqrt{\frac{1}{\lambda}} $$
 
 
+
+
+
+
+
 This completes our simple proof. This is not the most elegant proof of this result and I would be interested in knowing more elegant proofs. 
 
 #### Learning Experience 
 1. Experiment your theoretical beliefs. At first, I could not believe that this constrain on the solution space exists for all the $$\alpha_i's$$ and then I wrote a code to experiment it and it was indeed true. 
-
-#### References
-
-#### Acknowledgements
-

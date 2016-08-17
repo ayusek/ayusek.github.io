@@ -5,6 +5,8 @@ date:   2016-08-16 17:00:04 -0700
 categories: jekyll update
 ---
 
+$$ f(x,y) = \begin{cases} \text{Alice} & \text{if } x > y \ \text{Bob} & \text{if } x < y \ \text{same} & \text{if } x = y \end{cases} $$
+
 From a theoretical perspective, adding regularization makes a convex loss function strongly-convex, allowing faster optimization.  Regularization also restricts the solution space (under some constraints). Before diving into analyzing the minimizer, let us first define the problem. Hinge loss is often used as a surrogate loss for soft-margin SVM problems, and is defined as  : $$	l(w,x,y) = max(0, 1 - yw^Tx) $$
 
 Note that Hinge loss is a positive convex function (but not strongly-convex). If we consider the soft margin SVM we have the objective function as follows : 
@@ -28,7 +30,7 @@ $$ \forall x_i, y_i \epsilon R $$ ,the minimizer of the hinge loss always lies i
 
 &nbsp;&nbsp;&nbsp;&nbsp; Since, $$l(w,x,y)$$ is a positive function, and $$\frac{\lambda}{2}\|w\|^2 \geq 1 $$,  $$ \forall w $$  s.t.  $$ \|W\|^2 >  \frac{2}{\lambda}$$
 
-&nbsp;&nbsp;&nbsp;&nbsp; It is easy to see that $$ \|w^*\|^2 \leq \frac{2}{\lambda} $$ 
+&nbsp;&nbsp;&nbsp;&nbsp; It is easy to see that $$ \|w^*\|^2 \leq \frac{2}{\lambda} \blacksquare $$ 
 
 Isn\'t this an interesting observations that for convex positive loss functions (which have the same constant value at w = 0), l-2 regularization restricts the solution in a ball around the origin.  But we can do better than $$ \frac{2}{\lambda}$$. This fact was used in the PEGASOS algorithm by Shai Shalev-Shwartz et al. Their proof used ideas from Duality to restrict the solution space. 
 
@@ -52,6 +54,32 @@ $$
 $$
 
 Our loss function is composed of a bunch of Hinge losse wedges, each growing towards the left from $$ \frac{1}{\alpha_i} $$ and slope $$ - \alpha_i$$.
+
+Now let us divide the number line into the intervals $$ [0, \frac{1}{\alpha_1}] $$  , $$[\frac{1}{\alpha_1} , \frac{1}{\alpha_2}]$$,  ... ,  $$[\frac{1}{\alpha_{n-1}}, \frac{1}{\alpha_{n}}]$$, $$[\frac{1}{\alpha_n} , \infty]$$. 
+
+We observe that the loss function takes the same function form within each interval, but changes across intervals.  We can break down the loss function in these intervals  as follows : 
+
+ $$
+    L(w) = \begin{cases}  
+        \frac{\lambda}{2}w^2 + \frac{1}{n}\sum_{i=1}^{n} (1-w\alpha_i)   & \text{for }0\leq w\leq \frac{1}{\alpha_1}\\
+        \frac{\lambda}{2}w^2 + \frac{1}{n}\sum_{i=j}^{n} (1-w\alpha_i)  & \text{for }\frac{1}{\alpha_{j-1}}\leq w\leq \frac{1}{\alpha_j} \\
+          \frac{\lambda}{2}w^2 & \text{for } \frac{1}{\alpha_n} \leq w
+    \end{cases}
+
+ $$
+
+
+All of these are quadratics, each with a different minimizer. Let us look at the optimal solution of each of these quadratics (without worrying about if it lies in the domain of the quadratic for now). These are the points where the derivatives become 0 for the quadratic. 
+
+$$
+
+    w^* = \begin{cases}
+         \frac{1}{n\lambda}\sum_{i=1}^{n} (\alpha_i)  & \text{for }0\leq w\leq \frac{1}{\alpha_1}\\
+         \frac{1}{n\lambda}\sum_{i=j}^{n} (\alpha_i)  & \text{for }\frac{1}{\alpha_{j-1}}\leq w\leq \frac{1}{\alpha_j} \\
+         0  & \text{for } \frac{1}{\alpha_n} \leq w \\
+        \end{cases} 
+$$
+
 
 The actual minimizer is either a local-quadratic minimizer or an interval boundaries. 
 
@@ -103,9 +131,8 @@ $$ \Rightarrow  \frac{(n-i + 1) \alpha_j}{n \lambda} \geq \frac{1}{\alpha_j}$$
 
 $$ \Rightarrow \frac{1}{\alpha_j^2} \leq \frac{(n-i + 1)}{n \lambda} \leq \frac{1}{\lambda}$$
 
-$$\Rightarrow w* = \frac{1}{\alpha_j} \leq \sqrt{\frac{1}{\lambda}} $$
+$$\Rightarrow w* = \frac{1}{\alpha_j} \leq \sqrt{\frac{1}{\lambda}} \blacksquare $$
 
-$$\tag*{$\blacksquare$}$$
 
 
 This completes our simple proof. I am sure more elegant proofs exist for this problem, and I would be very happy to know about alternate solutions. 

@@ -16,8 +16,10 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://yourdomain.com" # the base hostname & protocol for your site
 twitter_username: jekyllrb
 github_username:  ayusek
+timezone: "America/Los_Angeles"
 
 # Build settings
+highlighter: rouge
 markdown: kramdown
 kramdown:
     math_engine: mathjax

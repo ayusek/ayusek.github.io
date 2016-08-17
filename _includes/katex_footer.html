@@ -10,6 +10,7 @@
       while (text !== (text = text.replace(/^(([^\\%]|\\.)*)%(.*)/, '$1'))) {
         continue;
       }
+
       var options = script.type.match(/mode\s*=\s*display/) ?
                     {displayMode: true} : {};
       script.insertAdjacentHTML("beforebegin",

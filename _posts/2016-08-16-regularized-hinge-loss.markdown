@@ -5,7 +5,7 @@ date:   2016-08-16 17:00:04 -0700
 categories: jekyll update
 ---
 
-From a theoretical perspective, adding regularization makes a convex loss function strongly-convex, allowing faster optimization.  Regularization also restricts the solution space (under some constraints). Before diving into analyzing the minimizer, let us first define the problem. Hinge loss is often used as a surrogate loss for soft-margin SVM problems, and is defined as  : \\(	l(w,x,y) = max(0, 1 - yw^Tx) \\)
+From a theoretical perspective, adding regularization makes a convex loss function strongly-convex, allowing faster optimization.  Regularization also restricts the solution space (under some constraints). Before diving into analyzing the minimizer, let us first define the problem. Hinge loss is often used as a surrogate loss for soft-margin SVM problems, and is defined as  : $$	l(w,x,y) = max(0, 1 - yw^Tx) $$
 
 Note that Hinge loss is a positive convex function (but not strongly-convex). If we consider the soft margin SVM we have the objective function as follows : 
 
@@ -55,30 +55,6 @@ Our loss function is composed of a bunch of Hinge losse wedges, each growing tow
 
 
 
-Now let us divide the number line into the intervals $$ [0, \frac{1}{\alpha_1}] $$  , $$[\frac{1}{\alpha_1} , \frac{1}{\alpha_2}]$$,  ... ,  $$[\frac{1}{\alpha_{n-1}}, \frac{1}{\alpha_{n}}]$$, $$[\frac{1}{\alpha_n} , \infty]$$. 
-
-We observe that the loss function takes the same function form within each interval, but changes across intervals.  We can break down the loss function in these intervals  as follows : 
-
-$$
-    L(w) = \begin{cases}  
-        \frac{\lambda}{2}w^2 + \frac{1}{n}\sum_{i=1}^{n} (1-w\alpha_i)   & \text{for }0\leq w\leq \frac{1}{\alpha_1}\\
-        \frac{\lambda}{2}w^2 + \frac{1}{n}\sum_{i=j}^{n} (1-w\alpha_i)  & \text{for }\frac{1}{\alpha_{j-1}}\leq w\leq \frac{1}{\alpha_j} \\
-          \frac{\lambda}{2}w^2 & \text{for } \frac{1}{\alpha_n} \leq w
-    \end{cases}
-
-$$ 
-
-
-All of these are quadratics, each with a different minimizer. Let us look at the optimal solution of each of these quadratics (without worrying about if it lies in the domain of the quadratic for now). These are the points where the derivatives become 0 for the quadratic. 
-
-$$
-
-    w^* = \begin{cases}
-         \frac{1}{n\lambda}\sum_{i=1}^{n} (\alpha_i)  & \text{for }0\leq w\leq \frac{1}{\alpha_1}\\
-         \frac{1}{n\lambda}\sum_{i=j}^{n} (\alpha_i)  & \text{for }\frac{1}{\alpha_{j-1}}\leq w\leq \frac{1}{\alpha_j} \\
-         0  & \text{for } \frac{1}{\alpha_n} \leq w \\
-        \end{cases} 
-$$
 
 The actual minimizer is either a local-quadratic minimizer or an interval boundaries. 
 

@@ -51,18 +51,16 @@ $$
     L(w) = \frac{\lambda}{2}\|w\|^2 + \frac{1}{n}\sum_{i=1}^{n}max(0,1-w^T\alpha_i)  ,  \text{where  } \alpha_i \geq 0 
 $$
 
-Our loss function is composed of a bunch of Hinge losse wedges, each growing towards the left from $$ \frac{1}{\alpha_i} $$ and slope $$- \alpha_i$$.
-
-
-
+Our loss function is composed of a bunch of Hinge losse wedges, each growing towards the left from $$ \frac{1}{\alpha_i} $$ and slope $$ - \alpha_i$$.
 
 The actual minimizer is either a local-quadratic minimizer or an interval boundaries. 
 
-***CASE 1 :*** $$ \mathbf{w^*}$$ ***is a local-quadratic minimizer***
+
+***CASE 1 :*** $$ w^* $$ ***is a local-quadratic minimizer***
 
 $$w^*$$ must lie in the interval for which the quadratic is defined. 
 
-***Sub-Case 1 :***  When $$\frac{1}{\alpha_n} \leq w* $$ 
+***Sub-Case 1 :***  When $$ \frac{1}{\alpha_n} \leq w* $$ 
 
 $$w^*$$ = 0 $$\Rightarrow {w^*}^2 \leq \frac{1}{\lambda}$$   (if this is the solution, when $$\forall i, \frac{1}{\alpha_i} = 0$$)
 

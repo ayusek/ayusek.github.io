@@ -5,7 +5,7 @@ date:   2016-08-16 17:00:04 -0700
 categories: jekyll update
 ---
 
-From a theoretical perspective, adding regularization makes a convex loss function strongly-convex, allowing faster optimization.  Regularization also restricts the solution space (under some constraints). Before diving into analyzing the minimizer, let us first define the problem. Hinge loss is often used as a surrogate loss for soft-margin SVM problems, and is defined as  : \\(	l(w,x,y) = max(0, 1 - yw^Tx) \\)
+From a theoretical perspective, adding regularization makes a convex loss function strongly-convex, allowing faster optimization.  Regularization also restricts the solution space (under some constraints). Before diving into analyzing the minimizer, let us first define the problem. Hinge loss is often used as a surrogate loss for soft-margin SVM problems, and is defined as  : $$	l(w,x,y) = max(0, 1 - yw^Tx) $$
 
 Note that Hinge loss is a positive convex function (but not strongly-convex). If we consider the soft margin SVM we have the objective function as follows : 
 
@@ -13,10 +13,10 @@ $$
 	L(w) = \frac{\lambda}{2}\|w\|^2 + \frac{1}{n}\sum_{i=1}^{n}max(0,1-y_iw^Tx_i)
 $$ 
 
-We want to find \\( w^* = argmin ( L(w)) \\)
+We want to find $$ w^* = argmin ( L(w)) $$
 
  **Claim :** 
-\\( \forall x_i, y_i \epsilon R \\) ,the minimizer of the hinge loss always lies in a ball of radius $$ \sqrt{\frac{1}{\lambda}} $$ or \\( {w^*}^2 \leq \frac{1}{\lambda} \\) 
+$$ \forall x_i, y_i \epsilon R $$ ,the minimizer of the hinge loss always lies in a ball of radius $$ \sqrt{\frac{1}{\lambda}} $$ or $$ {w^*}^2 \leq \frac{1}{\lambda} $$ 
 
 
 #### A Trivial Bound 
@@ -28,9 +28,9 @@ We want to find \\( w^* = argmin ( L(w)) \\)
 
 &nbsp;&nbsp;&nbsp;&nbsp; Since, $$l(w,x,y)$$ is a positive function, and $$\frac{\lambda}{2}\|w\|^2 \geq 1 $$,  $$ \forall w $$  s.t.  $$ \|W\|^2 >  \frac{2}{\lambda}$$
 
-&nbsp;&nbsp;&nbsp;&nbsp; It is easy to see that \\( \|w^*\|^2 \leq \frac{2}{\lambda} \\) $$\tag*{$\blacksquare$}$$
+&nbsp;&nbsp;&nbsp;&nbsp; It is easy to see that $$ \|w^*\|^2 \leq \frac{2}{\lambda} $$ 
 
-Isn't this an interesting observations that for convex positive loss functions ( which have the same constant value at w = 0), l-2 regularization restricts the solution in a ball around the origin.  But we can do better than $$ \frac{2}{\lambda}$$. This fact was used in the PEGASOS algorithm by Shai Shalev-Shwartz et al. Their proof used ideas from Duality to restrict the solution space. 
+Isn\'t this an interesting observations that for convex positive loss functions (which have the same constant value at w = 0), l-2 regularization restricts the solution in a ball around the origin.  But we can do better than $$ \frac{2}{\lambda}$$. This fact was used in the PEGASOS algorithm by Shai Shalev-Shwartz et al. Their proof used ideas from Duality to restrict the solution space. 
 
 #### Improving over the Trivial Bound 
 We give a proof using Geometric Intuition and Basic Algebra. Instead of analyzing the general problem, we make the following simplifications, all of which are consistent with the result : 
@@ -39,7 +39,7 @@ We give a proof using Geometric Intuition and Basic Algebra. Instead of analyzin
 
 2.  We give the analysis for one dimensional problem. Analysis for multiple dimensions is similar where we go to concentric rings and quadratic surfaces instead of parabola's and intervals in our analysis. Our proof's can be easily extended to multiple dimensions by operating on norms. 
 
-3. Without loss of generality, we would be assuming $$w^* \geq 0 $$. In case $$w^8 \leq 0$$, we can simply replace all the $$\alpha_i$$ by $$-\alpha_i$$ and then bound $$w^*$$. 
+3. Without loss of generality, we would be assuming $$w^* \geq 0 $$. In case $$w^* \leq 0$$, we can simply replace all the $$\alpha_i$$ by $$-\alpha_i$$ and then bound $$w^*$$. 
 
 4. Under the assumption 3, we observe that the presence of terms with negative $$\alpha_k$$ pushes the optimal solution closer to the origin, when compared to the case when we replace $$\alpha_k$$ with $$- \alpha_k$$. Hence, we would be replacing all the negative $$\alpha_k$$ with $$-\alpha_k$$.
 
@@ -60,14 +60,10 @@ Now let us divide the number line into the intervals $$ [0, \frac{1}{\alpha_1}] 
 We observe that the loss function takes the same function form within each interval, but changes across intervals.  We can break down the loss function in these intervals  as follows : 
 
 $$
-
     L(w) = \begin{cases}  
-
         \frac{\lambda}{2}w^2 + \frac{1}{n}\sum_{i=1}^{n} (1-w\alpha_i)   & \text{for }0\leq w\leq \frac{1}{\alpha_1}\\
         \frac{\lambda}{2}w^2 + \frac{1}{n}\sum_{i=j}^{n} (1-w\alpha_i)  & \text{for }\frac{1}{\alpha_{j-1}}\leq w\leq \frac{1}{\alpha_j} \\
           \frac{\lambda}{2}w^2 & \text{for } \frac{1}{\alpha_n} \leq w
-        
-
     \end{cases}
 
 $$ 

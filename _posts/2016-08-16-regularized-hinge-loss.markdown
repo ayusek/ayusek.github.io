@@ -7,7 +7,7 @@ categories: jekyll update
 
 As a theoretical advantage, adding regularization makes a convex loss function strongly-convex, allowing one to use fast converging gradient algorithms for optimization. An interesting observation is that regularization also restricts the solution space \(under some constraints\).
 
-***Theorem:*** *For a regulaised loss function of the form* 
+***Theorem :*** *For a regularized loss function of the form* 
 
 $$
   L(w) = \frac{\sum_{i=1}^{n} l(w, x_i, y_i)}{n} + \frac{\lambda}{2}\|w\|^2 
@@ -15,11 +15,11 @@ $$
 
 *if* $$l(0, x_i, y_i) = 1$$ *for all* $$x_i, y_i$$, *then* $$w^*$$ *or the unconstrained minimizer of* $$L(w)$$ *lies in a ball of radius* $$ \sqrt{\frac{2}{\lambda}} $$ *centered at the origin or* $$\|w^*\| \leq \sqrt{\frac{2}{\lambda}}$$
 
-**Proof** - 
+**Proof :**  
 
 &nbsp;&nbsp;&nbsp;&nbsp; Observer that L(0) = 1 
 
-&nbsp;&nbsp;&nbsp;&nbsp; Since, $$l(w,x,y)$$ is a positive function, and $$\frac{\lambda}{2}\|w\|^2 \geq 1 $$,  $$ \forall w $$  s.t.  $$ \|w\|^2 >  \frac{2}{\lambda}$$
+&nbsp;&nbsp;&nbsp;&nbsp; Since $$l(w,x,y)$$ is a positive function, and $$\frac{\lambda}{2}\|w\|^2 \geq 1 $$,  $$ \forall w $$  s.t.  $$ \|w\|^2 >  \frac{2}{\lambda}$$
 
 &nbsp;&nbsp;&nbsp;&nbsp; It is easy to see that $$ \|w^*\|^2 \leq \frac{2}{\lambda} \blacksquare $$ 
 

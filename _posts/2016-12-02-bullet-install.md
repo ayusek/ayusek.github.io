@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Regularized Hinge Loss and the Bounded Solution"
+title:  "Pybullet Installation Steps"
 date:   2016-12-02 17:00:04 -0700
 categories: jekyll update
 ---

@@ -1,0 +1,6 @@
+# To update the instructions
+  bundle update 
+
+# To test locally 
+  bundle exec jekyll serve
+
